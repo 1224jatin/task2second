@@ -114,7 +114,7 @@ class _Task2Mainscreen extends State<Task2MainScreen>{
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> TasklistScreen()));
               }
 
-            }, child: const Text("subbmit"))
+            }, child: const Text("submit"))
           ],
         ),
       ),
