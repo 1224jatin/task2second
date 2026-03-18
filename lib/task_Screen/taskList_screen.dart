@@ -37,7 +37,7 @@ class _TasklistScreen extends State<TasklistScreen>{
                   Row(
                     children: [
                       const Text("Date = ", style: TextStyle( fontSize: 20)),
-                      Text(vm.tasks[index].taskDate)
+                      Text("${vm.tasks[index].taskDate.day}/${vm.tasks[index].taskDate.month}/${vm.tasks[index].taskDate.year}")
                     ],
                   ),
                   Row(
@@ -52,9 +52,14 @@ class _TasklistScreen extends State<TasklistScreen>{
                       duration: Duration(seconds: 2),));
                   }, child: const Text("Done"),),
                   ElevatedButton(onPressed: (){
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: const Text("task is Deleted"),
-                      duration: Duration(seconds: 2),));
+                    vm.removeTask(index);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:
+                    const Text("your task is deleted "),
+                    duration: Duration(seconds: 2),
+                    ));
+
+
+
                   }, child: const Text(" Delete"))
 
                 ],

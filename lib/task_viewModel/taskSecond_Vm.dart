@@ -1,19 +1,17 @@
 import 'package:flutter/cupertino.dart';
+import 'package:hive/hive.dart';
 import 'package:task2/task_Model/taskSecond_Model.dart';
 import 'package:flutter/material.dart';
 
 class TasksecondVm extends ChangeNotifier{
-  List<Task> tasks=[];
-  void addTask(String  taskName , String taskDate , String taskDescription , String taskPriority ){
-    tasks.add(Task(taskName: taskName,
-        taskDate: taskDate,
-        taskDescription: taskDescription,
-        taskPerority: taskPriority
-    ));
+  final box = Hive.box('task');
+  List get tasks=>box.values.toList() ;
+  void addTask(Map task ){
+    box.add(task);
     notifyListeners();
   }
   void removeTask(int index ){
-    tasks.removeAt(index);
+    box.deleteAt(index);
 notifyListeners();
   }
 

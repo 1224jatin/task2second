@@ -19,6 +19,24 @@ class _Task2Mainscreen extends State<Task2MainScreen>{
   TextEditingController priorityCOntroler = TextEditingController();
   List<String> priorities =["High", "Medium", "Low"];
   String selectedPriority = "Low";
+  DateTime selectedDate = DateTime.now();
+
+
+  Future<void>pickDate()async {
+    final DateTime? pickedDate =
+    await showDatePicker(context: context, firstDate: DateTime(2000),
+        lastDate: DateTime(2030));
+    if(pickedDate != null){
+
+      setState(() {
+        selectedDate = pickedDate;
+        dateController.text="${selectedDate.day}/${selectedDate.month}/${selectedDate.year}";
+
+      });
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +74,7 @@ class _Task2Mainscreen extends State<Task2MainScreen>{
                 color: Colors.lightBlueAccent,
                 child: TextFormField(
                   controller: dateController,
+                  onTap:pickDate,
                   decoration: InputDecoration(
                       label: const Text("Date ")
                   ),
@@ -108,8 +127,14 @@ class _Task2Mainscreen extends State<Task2MainScreen>{
             ElevatedButton(onPressed: (){
               if(_formkey.currentState!.validate()){
                 Provider.of<TasksecondVm>(context,listen: false)
-                    .addTask(taskNameController.text, descriptionController.text, dateController.text,
-                selectedPriority);
+                    .addTask(
+                    {
+                      "taskName": taskNameController,
+                      "taskDate": selectedDate,
+                      "taskDescription": descriptionController,
+                      "priority": selectedPriority
+                    }
+                );
 
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> TasklistScreen()));
               }

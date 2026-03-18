@@ -1,6 +1,6 @@
 class Task{
   final String taskName ;
-  final String taskDate ;
+  final DateTime taskDate ;
   final String taskDescription ;
   final String taskPerority ;
 
