@@ -19,7 +19,7 @@ class _Task2Mainscreen extends State<Task2MainScreen>{
   TextEditingController priorityCOntroler = TextEditingController();
   List<String> priorities =["High", "Medium", "Low"];
   String selectedPriority = "Low";
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate=DateTime.now();
 
 
   Future<void>pickDate()async {
@@ -45,6 +45,9 @@ class _Task2Mainscreen extends State<Task2MainScreen>{
       leading: Icon(Icons.list_alt , size: 15),backgroundColor: Colors.red,
     ),
       body: SingleChildScrollView(
+        child:Padding(padding:
+        EdgeInsetsGeometry.only(top:80,left: 10,right: 10)
+        ,
         child: Form(key: _formkey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -136,6 +139,10 @@ class _Task2Mainscreen extends State<Task2MainScreen>{
                         "priority": selectedPriority
                       }
                   );
+                  taskNameController.clear();
+                  descriptionController.clear();
+                  dateController.clear();
+                  priorityCOntroler.clear();
 
                   Navigator.push(context, MaterialPageRoute(builder: (context)=> TasklistScreen()));
                 }
@@ -147,7 +154,7 @@ class _Task2Mainscreen extends State<Task2MainScreen>{
               }, child: const Text(" Tasks"))
             ],
           ),
-        ),
+        ),)
       ),
 
     );
