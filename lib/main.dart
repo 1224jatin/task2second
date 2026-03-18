@@ -10,7 +10,7 @@ import 'package:task2/task_viewModel/taskSecond_Vm.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  await Hive.openBox<Task>("taskBox");
+  await Hive.openBox('task');
 
   runApp(
       ChangeNotifierProvider(

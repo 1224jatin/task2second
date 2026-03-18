@@ -18,7 +18,7 @@ class _TasklistScreen extends State<TasklistScreen>{
           return Container( height: 200,width: 300,
             child: Card(
               //background Card
-               color: vm.getpriorityColor(vm.tasks[index].taskPerority) ,
+               color: vm.getpriorityColor(vm.tasks[index]["priority"]) ,
                 child:
               Column(
                 // column for task date de.....!
@@ -31,19 +31,20 @@ class _TasklistScreen extends State<TasklistScreen>{
                   // row for title  , info
                   children: [
                     const Text("Task = ", style: TextStyle( fontSize: 20),),
-                    Text(vm.tasks[index].taskName)
+                    Text(vm.tasks[index]["taskName"])
                   ],
                 ),
                   Row(
                     children: [
                       const Text("Date = ", style: TextStyle( fontSize: 20)),
-                      Text("${vm.tasks[index].taskDate.day}/${vm.tasks[index].taskDate.month}/${vm.tasks[index].taskDate.year}")
+                      Text("${vm.tasks[index]["taskDate"].day}/${vm.tasks[index]
+                      ["taskDate"].month}/${vm.tasks[index]["taskDate"].year}")
                     ],
                   ),
                   Row(
                     children: [
                       const Text("Task = ", style: TextStyle( fontSize: 20)),
-                      Text(vm.tasks[index].taskDescription)
+                      Text(vm.tasks[index]["taskDescription"])
                     ],
                   ),
                   ElevatedButton(onPressed: (){
