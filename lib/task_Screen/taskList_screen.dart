@@ -9,9 +9,13 @@ class TasklistScreen extends StatefulWidget{
   State<StatefulWidget> createState() => _TasklistScreen();
 }
 class _TasklistScreen extends State<TasklistScreen>{
-  late final vm = Provider.of<TasksecondVm>(context) ;
+
+
   @override
   Widget build(BuildContext context) {
+
+    final vm = Provider.of<TasksecondVm>(context) ;
+
     return Scaffold(
       body: Center(
         child: ListView.builder(itemBuilder: (context,index) {
@@ -70,7 +74,7 @@ class _TasklistScreen extends State<TasklistScreen>{
 
           );
 
-        }, itemCount: vm.tasks.length,),
+        }, itemCount: vm.tasks.length),
       ),
     );
   }

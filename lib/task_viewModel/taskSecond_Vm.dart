@@ -8,6 +8,7 @@ class TasksecondVm extends ChangeNotifier{
   List get tasks=>box.values.toList() ;
   void addTask(Map task ){
     box.add(task);
+    print("Task added ${box.values.toList()}");
     notifyListeners();
   }
   void removeTask(int index ){

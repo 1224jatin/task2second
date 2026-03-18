@@ -44,103 +44,109 @@ class _Task2Mainscreen extends State<Task2MainScreen>{
       title: const Text("Task Second", style: TextStyle(fontSize: 15 ),),
       leading: Icon(Icons.list_alt , size: 15),backgroundColor: Colors.red,
     ),
-      body: Form(key: _formkey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              child:
-              Card(
-                color: Colors.lightBlueAccent,
-                child: TextFormField(
-                  controller: taskNameController,
-                  decoration: InputDecoration(
-                      label: const Text("Task ")
+      body: SingleChildScrollView(
+        child: Form(key: _formkey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                child:
+                Card(
+                  color: Colors.lightBlueAccent,
+                  child: TextFormField(
+                    controller: taskNameController,
+                    decoration: InputDecoration(
+                        label: const Text("Task ")
+                    ),
+                    validator: (value){
+                      if (value == null){
+                        return "enter Task";
+                      }else{
+                        return null ;
+                      }
+                    },
                   ),
-                  validator: (value){
-                    if (value == null){
-                      return "enter Task";
-                    }else{
-                      return null ;
-                    }
-                  },
                 ),
               ),
-            ),
-            Container(
-              child:
-              Card(
-                color: Colors.lightBlueAccent,
-                child: TextFormField(
-                  controller: dateController,
-                  onTap:pickDate,
-                  decoration: InputDecoration(
-                      label: const Text("Date ")
+              Container(
+                child:
+                Card(
+                  color: Colors.lightBlueAccent,
+                  child: TextFormField(
+                    controller: dateController,
+                    onTap:pickDate,
+                    decoration: InputDecoration(
+                        label: const Text("Date ")
+                    ),
+                    validator: (value){
+                      if (value == null){
+                        return "enter date";
+                      }else{
+                        return null ;
+                      }
+                    },
                   ),
-                  validator: (value){
-                    if (value == null){
-                      return "enter date";
-                    }else{
-                      return null ;
-                    }
-                  },
                 ),
               ),
-            ),
-            Container(
-              child:
-              Card(
-                color: Colors.lightBlueAccent,
-                child: TextFormField(
-                  controller: descriptionController,
-                  decoration: InputDecoration(
+              Container(
+                child:
+                Card(
+                  color: Colors.lightBlueAccent,
+                  child: TextFormField(
+                    controller: descriptionController,
+                    decoration: InputDecoration(
                       label: const Text("Description "),
 
-                  ),maxLines: 5,
-                  validator: (value){
-                    if (value == null){
-                      return "enter Task";
-                    }else{
-                      return null ;
-                    }
-                  },
+                    ),maxLines: 5,
+                    validator: (value){
+                      if (value == null){
+                        return "enter Task";
+                      }else{
+                        return null ;
+                      }
+                    },
+                  ),
                 ),
               ),
-            ),
-            DropdownButtonFormField<String>(
-              value: selectedPriority,
-              decoration: InputDecoration(
-                label: const Text("Select Priority"),
+              DropdownButtonFormField<String>(
+                value: selectedPriority,
+                decoration: InputDecoration(
+                  label: const Text("Select Priority"),
+                ),
+                items: priorities.map((String priority){
+                  return DropdownMenuItem(child: Text(priority),
+                      value: priority);
+                }).toList(),
+                onChanged: (String? newValue){
+                  setState(() {
+                    selectedPriority=newValue!;
+                  });
+
+                },
               ),
-              items: priorities.map((String priority){
-                return DropdownMenuItem(child: Text(priority),
-                value: priority);
-              }).toList(),
-              onChanged: (String? newValue){
-                setState(() {
-                  selectedPriority=newValue!;
-                });
+              ElevatedButton(onPressed: (){
+                if(_formkey.currentState!.validate()){
+                  Provider.of<TasksecondVm>(context,listen: false)
+                      .addTask(
+                      {
+                        "taskName": taskNameController.text,
+                        "taskDate": selectedDate,
+                        "taskDescription": descriptionController.text,
+                        "priority": selectedPriority
+                      }
+                  );
 
-              },
-            ),
-            ElevatedButton(onPressed: (){
-              if(_formkey.currentState!.validate()){
-                Provider.of<TasksecondVm>(context,listen: false)
-                    .addTask(
-                    {
-                      "taskName": taskNameController,
-                      "taskDate": selectedDate,
-                      "taskDescription": descriptionController,
-                      "priority": selectedPriority
-                    }
-                );
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> TasklistScreen()));
+                }
 
+              }, child: const Text("submit")),
+
+              ElevatedButton(onPressed: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> TasklistScreen()));
-              }
-
-            }, child: const Text("submit"))
-          ],
+              }, child: const Text(" Tasks"))
+            ],
+          ),
         ),
       ),
 
