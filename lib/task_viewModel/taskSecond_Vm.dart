@@ -1,19 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
+import 'package:task2/sqlflite_DB/db_helper.dart';
 import 'package:task2/task_Model/taskSecond_Model.dart';
 import 'package:flutter/material.dart';
 
 class TasksecondVm extends ChangeNotifier{
-  final box = Hive.box('task');
-  List get tasks=>box.values.toList() ;
-  void addTask(Map task ){
-    box.add(task);
-    print("Task added ${box.values.toList()}");
+
+
+  void addTask(Task task){
+    DbHelper().insertData(task);
     notifyListeners();
   }
   void removeTask(int index ){
-    box.deleteAt(index);
-notifyListeners();
+
   }
 
 Color getpriorityColor(String taskPriority){

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:task2/task_Model/taskSecond_Model.dart';
 import 'package:task2/task_Screen/taskList_screen.dart';
 
 import '../task_viewModel/taskSecond_Vm.dart';
@@ -11,6 +12,7 @@ class Task2MainScreen extends StatefulWidget{
 
 }
 class _Task2Mainscreen extends State<Task2MainScreen>{
+
   late final vm = Provider.of<TasksecondVm>(context);
   final _formkey = GlobalKey<FormState>();
   TextEditingController taskNameController = TextEditingController();
@@ -132,12 +134,10 @@ class _Task2Mainscreen extends State<Task2MainScreen>{
                 if(_formkey.currentState!.validate()){
                   Provider.of<TasksecondVm>(context,listen: false)
                       .addTask(
-                      {
-                        "taskName": taskNameController.text,
-                        "taskDate": selectedDate,
-                        "taskDescription": descriptionController.text,
-                        "priority": selectedPriority
-                      }
+                    Task(taskName: taskNameController.text,
+                        taskDate: selectedDate,
+                        taskDescription: descriptionController.text,
+                        taskPerority: selectedPriority)
                   );
                   taskNameController.clear();
                   descriptionController.clear();

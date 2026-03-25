@@ -9,5 +9,14 @@ class Task{
     required this.taskDate,
     required this.taskDescription,
     required this.taskPerority
-});
+  });
+  Map<String, dynamic> toMap(){
+    return {
+      "taskName" : taskName,
+      "taskDate" : taskDate,
+      "taskDespription": taskDescription,
+      "taskPeriority" : taskPerority,
+    };
+  }
+
 }
